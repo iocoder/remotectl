@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+sshpass -e ssh -t $SSHUSER@$SSHHOST -p $SSHPORT "exec top"
+SSHPASS=
+
+printf '\n'
+printf '[top terminated]\n'
+sleep infinity

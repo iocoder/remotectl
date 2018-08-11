@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# create tmp dir
+cd $(mktemp -d)
+
+# scp remote file
+sshpass -e scp -P $SSHPORT $SSHUSER@$SSHHOST:$SSHFILE $SSHNAME
+
+# run vim
+if [ $? -eq 0 ]; then
+    CMD="sshpass -e scp -P $SSHPORT $SSHNAME $SSHUSER@$SSHHOST:$SSHFILE";
+    vim -c ":command W write | ! sh -c 'clear; $CMD' " -c ":cabbrev w W" $SSHNAME;
+fi
+
+# done
+echo [process terminated]
+sleep infinity

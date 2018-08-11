@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+WHITE='\033[1;37m'
+NC='\033[0m' # No Color
+
+COLS=$(tput cols);
+ADJ=$((64+(($COLS-64)/4)));
+
+printf $YELLOW
+printf '\n'
+printf '%*s\n' $ADJ '              ___                 __      _______  __           '
+printf '%*s\n' $ADJ '             / _ \___ __ _  ___  / /____ / ___/ /_/ /           '
+printf '%*s\n' $ADJ '            / , _/ -_)    \/ _ \/ __/ -_) /__/ __/ /            '
+printf '%*s\n' $ADJ '           /_/|_|\__/_/_/_/\___/\__/\__/\___/\__/_/             '
+printf '\n'
+
+printf $CYAN
+printf '%*s\n' $ADJ '                     Remote Terminal Window                     '
+printf '\n'
+
+printf $WHITE
+printf '%*s\n' $ADJ 'Thank you for choosing RemoteCtl. RemoteCtl lets you manage your'
+printf '%*s\n' $ADJ 'remote files efficiently by providing remote shell, remote text '
+printf '%*s\n' $ADJ 'editor, and remote file browser all in one place. Enjoy hacking!'
+printf '\n'
+
+printf $NC
+sshpass -e ssh -t $SSHUSER@$SSHHOST -p $SSHPORT "cd $SSHDIR; exec \$SHELL"
+SSHPASS=
+
+printf $WHITE
+printf '\n'
+printf '[ssh terminated]\n'
+sleep infinity
