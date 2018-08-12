@@ -29,3 +29,11 @@ to install the binaries to your system.
 ## Running
 
 Execute `remotectl` command to run the program.
+
+## Screenshots
+
+![Login screen](shots/shot01.png)
+![Main Window](shots/shot02.png)
+![Editing a file](shots/shot03.png)
+![Running top](shots/shot04.png)
+
