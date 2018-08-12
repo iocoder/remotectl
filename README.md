@@ -16,6 +16,9 @@ on how to install RemoteCtl.
   - g++
   - qmake
 
+You might want to configure libssh2 with the command:
+`./configure --prefix=/usr --enable-debug --enable-gex-new`.
+
 ## Install
 
 Simply create a build directory inside the repository tree, then
