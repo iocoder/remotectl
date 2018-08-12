@@ -20,11 +20,11 @@ int main(int argc, char *argv[])
 
     /* connection parameters for development */
     QString name = "test";
-    QString host = "speech-a-74.pnp.melodis.com";
+    QString host = "localhost";
     QString port = "22";
     QString user = "mostafa";
     QString pass;
-    QString dir  = "/disk1/mostafa";
+    QString dir  = "/";
     ConnectionManager *connection;
 
     /* create terminal login shell script */
