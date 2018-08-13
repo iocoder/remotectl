@@ -94,6 +94,53 @@ void MainWindow::refreshTree(QTreeWidgetItem *item) {
     item->sortChildren(1, Qt::SortOrder::AscendingOrder);
 }
 
+void MainWindow::attachConsoleActions(QTermWidget *console, int tabNo) {
+    /* console menu */
+    QMenu *consoleMenu = new QMenu(console);
+    consoleMenu->addAction(ui->actionCopyText->icon(), ui->actionCopyText->text());
+    consoleMenu->addAction(ui->actionPasteText->icon(), ui->actionPasteText->text());
+    consoleMenu->addAction(ui->actionKeyStroke->icon(), ui->actionKeyStroke->text());
+    consoleMenu->addSeparator();
+    consoleMenu->addAction(ui->actionScrollbar->icon(), ui->actionScrollbar->text());
+    consoleMenu->addAction(ui->actionColorScheme->icon(), ui->actionColorScheme->text());
+    consoleMenu->addAction(ui->actionFont->icon(), ui->actionFont->text());
+    consoleMenu->addSeparator();
+    consoleMenu->addAction(ui->actionCloseTab->icon(), ui->actionCloseTab->text());
+    /* copy */
+    connect(consoleMenu->actions().at(0), &QAction::triggered,
+            this, [=]() -> void {
+                console->copyClipboard();
+            });
+    /* paste */
+    connect(consoleMenu->actions().at(1), &QAction::triggered,
+            this, [=]() -> void {
+                console->pasteClipboard();
+            });
+    /* add menu to console */
+    console->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(console, &QTermWidget::customContextMenuRequested,
+            this, [=](const QPoint &pt) -> void {
+                /* show context menu */
+                consoleMenu->exec(console->mapToGlobal(pt));
+            });
+    /* keyboard shortcuts */
+    connect(console, &QTermWidget::termKeyPressed,
+            this, [=](const QKeyEvent *key) -> void {
+                /* copy? */
+                if (key->modifiers() & Qt::AltModifier and
+                    key->text().toLower() == "c")
+                {
+                    console->copyClipboard();
+                }
+                /* paste? */
+                if (key->modifiers() & Qt::AltModifier and
+                    key->text().toLower() == "v")
+                {
+                    console->pasteClipboard();
+                }
+            });
+}
+
 void MainWindow::openTerm() {
     QList<QString>::iterator qstr;
     QStringList qstrlist;
@@ -122,11 +169,7 @@ void MainWindow::openTerm() {
     tabNo = ui->tabView->addTab(console, ui->actionTerminal->icon(), "ssh:" + dir);
     ui->tabView->setCurrentIndex(tabNo);
     console->setFocus();
-    /* enable copy/paste */
-    QObject::connect(console, &QTermWidget::termKeyPressed,
-                     this, [=](const QKeyEvent *key) -> void {
-                                 this->on_console_keyPressed(key, console);
-                               });
+    attachConsoleActions(console, tabNo);
     /* login shell */
     console->setShellProgram("/tmp/remotectl_login.sh");
     console->startShellProgram();
@@ -150,11 +193,7 @@ void MainWindow::openTop() {
     tabNo = ui->tabView->addTab(console, ui->actionTop->icon(), "top");
     ui->tabView->setCurrentIndex(tabNo);
     console->setFocus();
-    /* enable copy/paste */
-    QObject::connect(console, &QTermWidget::termKeyPressed,
-                     this, [=](const QKeyEvent *key) -> void {
-                                 this->on_console_keyPressed(key, console);
-                               });
+    attachConsoleActions(console, tabNo);
     /* login shell */
     console->setShellProgram("/tmp/remotectl_top.sh");
     console->startShellProgram();
@@ -181,11 +220,7 @@ void MainWindow::openEditor(QString path, QString fname) {
     tabNo = ui->tabView->addTab(console, connection->fileIcon(fname), fname);
     ui->tabView->setCurrentIndex(tabNo);
     console->setFocus();
-    /* enable copy/paste */
-    QObject::connect(console, &QTermWidget::termKeyPressed,
-                     this, [=](const QKeyEvent *key) -> void {
-                                 this->on_console_keyPressed(key, console);
-                               });
+    attachConsoleActions(console, tabNo);
     /* login shell */
     console->setShellProgram("/tmp/remotectl_editor.sh");
     console->startShellProgram();
@@ -292,18 +327,3 @@ void MainWindow::on_actionAbout_triggered()
                        QString(PROGNAME) + " " + PROGVERSION,
                        "Copyright (c) 2018 - Mostafa Abdelaziz.");
 }
-
-void MainWindow::on_console_keyPressed(const QKeyEvent *key, QTermWidget *console)
-{
-    if (key->modifiers() & Qt::AltModifier and
-        key->text().toLower() == "c")
-    {
-        console->copyClipboard();
-    }
-    if (key->modifiers() & Qt::AltModifier and
-        key->text().toLower() == "v")
-    {
-        console->pasteClipboard();
-    }
-}
-

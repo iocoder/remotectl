@@ -120,7 +120,7 @@
     </property>
     <addaction name="actionShowHidden"/>
     <addaction name="separator"/>
-    <addaction name="action_Options"/>
+    <addaction name="actionOptions"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menuEdit"/>
@@ -312,7 +312,8 @@
   </action>
   <action name="actionTop">
    <property name="icon">
-    <iconset theme="hwinfo"/>
+    <iconset theme="hwinfo">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Top</string>
@@ -326,12 +327,66 @@
     <string>Show &amp;Hidden Files</string>
    </property>
   </action>
-  <action name="action_Options">
+  <action name="actionOptions">
    <property name="icon">
-    <iconset theme="configure"/>
+    <iconset theme="configure">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Options...</string>
+   </property>
+  </action>
+  <action name="actionCopyText">
+   <property name="icon">
+    <iconset theme="edit-copy"/>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionPasteText">
+   <property name="icon">
+    <iconset theme="edit-paste"/>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionKeyStroke">
+   <property name="icon">
+    <iconset theme="preferences-desktop-keyboard"/>
+   </property>
+   <property name="text">
+    <string>Send Key Stroke</string>
+   </property>
+  </action>
+  <action name="actionScrollbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Scrollbar</string>
+   </property>
+  </action>
+  <action name="actionColorScheme">
+   <property name="text">
+    <string>Set Color Scheme</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="icon">
+    <iconset theme="preferences-desktop-font"/>
+   </property>
+   <property name="text">
+    <string>Set Font</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="icon">
+    <iconset theme="tab-close"/>
+   </property>
+   <property name="text">
+    <string>Close Tab</string>
    </property>
   </action>
  </widget>

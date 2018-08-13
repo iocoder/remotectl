@@ -16,12 +16,14 @@ class MainWindow : public QMainWindow
     ConnectionManager *connection;
     QLineEdit *txtAddress;
 
+    void refreshTree(QTreeWidgetItem *item);
+    void attachConsoleActions(QTermWidget *console, int tabNo);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void setConnection(ConnectionManager *_connection);
     void openDirectory(QString dir);
-    void refreshTree(QTreeWidgetItem *item);
     void openTerm();
     void openEditor(QString path, QString fname);
     void openTop();
@@ -40,7 +42,6 @@ private slots:
     void on_actionNewSession_triggered();
     void on_actionQuitSession_triggered();
     void on_actionAbout_triggered();
-    void on_console_keyPressed(const QKeyEvent *key, QTermWidget *console);
 
 private:
     Ui::MainWindow *ui;
