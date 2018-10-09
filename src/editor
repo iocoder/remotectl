@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# encoding
+export LANG=en_US.UTF-8
+
 # create tmp dir
 cd $(mktemp -d)
 

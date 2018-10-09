@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
-sshpass -e ssh -t $SSHUSER@$SSHHOST -p $SSHPORT "exec top"
+export LANG=en_US.UTF-8
+
+sshpass -e ssh -t $SSHUSER@$SSHHOST -p $SSHPORT "LANG=$LANG exec top"
 SSHPASS=
 
 printf '\n'

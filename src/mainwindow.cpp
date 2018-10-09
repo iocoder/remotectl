@@ -151,6 +151,8 @@ void MainWindow::openTerm() {
     dir = ui->lstDir->topLevelItem(0)->text(2);
     /* open console */
     QTermWidget *console = new QTermWidget(0);
+    /* set font */
+    console->setTerminalFont(QFont("DEC Terminal"));
     /* console colors */
     qstrlist = console->availableColorSchemes();
     for (qstr = qstrlist.begin(); qstr != qstrlist.end(); qstr++) {
@@ -182,6 +184,8 @@ void MainWindow::openTop() {
     QTermWidget *console = new QTermWidget(0);
     /* console colors */
     console->setColorScheme("GreenOnBlack");
+    /* set font */
+    console->setTerminalFont(QFont("DEC Terminal"));
     /* environment variables */
     env.append(QString("SSHHOST=")+connection->getHost());
     env.append(QString("SSHPORT=")+connection->getPort());
@@ -207,6 +211,8 @@ void MainWindow::openEditor(QString path, QString fname) {
     console = new QTermWidget(0);
     /* console colors */
     console->setColorScheme("GreenOnBlack");
+    /* set font */
+    console->setTerminalFont(QFont("DEC Terminal"));
     /* environment variables */
     env.append(QString("SSHHOST=")+connection->getHost());
     env.append(QString("SSHPORT=")+connection->getPort());
