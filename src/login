@@ -30,7 +30,7 @@ printf '%*s\n' $ADJ 'editor, and remote file browser all in one place. Enjoy hac
 printf '\n'
 
 printf $NC
-sshpass -e ssh -t $SSHUSER@$SSHHOST -p $SSHPORT "cd $SSHDIR; LANG=$LANG exec \$SHELL"
+sshpass -e ssh -o "StrictHostKeyChecking no" -t $SSHUSER@$SSHHOST -p $SSHPORT "cd $SSHDIR; LANG=$LANG exec \$SHELL"
 SSHPASS=
 
 printf $WHITE

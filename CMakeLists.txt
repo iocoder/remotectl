@@ -14,8 +14,8 @@ CMAKE_POLICY(SET CMP0011 OLD)
 
 # find qt packages
 find_package(PkgConfig                REQUIRED)
-find_package(Qt5Widgets     "5.11.1"  REQUIRED)
-find_package(qtermwidget5   "0.9.0"   REQUIRED)
+find_package(Qt5Widgets               REQUIRED)
+find_package(qtermwidget5             REQUIRED)
 
 # find pkgconfig packages
 pkg_check_modules(LIBSSH2 libssh2>=1.5.0      REQUIRED)
