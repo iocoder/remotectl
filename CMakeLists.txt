@@ -5,7 +5,7 @@ project (remotctl)
 
 # declaring source files
 file(GLOB SOURCES      "src/*.cpp")
-file(GLOB MOC_HEADERS  "src/*.h"  )
+file(GLOB MOC_HEADERS  "src/*window.h"  )
 file(GLOB UIS          "src/*.ui" )
 file(GLOB RESOURCES    "src/*.qrc")
 
